@@ -3,4 +3,4 @@
 image: gitpod/workspace-postgres
 vscode:
   extensions:
-    - ms-ossdata.vscode-postgresql
+    - cweijan.vscode-mysql-client2
