@@ -1,0 +1,6 @@
+# https://www.gitpod.io/guides/gitpodify#postgresql
+
+image: gitpod/workspace-postgres
+vscode:
+  extensions:
+    - ms-ossdata.vscode-postgresql
