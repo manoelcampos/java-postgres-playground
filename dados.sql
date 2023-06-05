@@ -1,10 +1,22 @@
 -- Script PostgreSQL com cadastro de cidades e estados do país, conforme IBGE.
 -- Adaptado de https://www.ricardoarrigoni.com.br/cidades-brasil-lista-de-cidades-brasileiras-em-sql/
 
+drop table if exists cidade;
+drop table if exists estado;
+drop table if exists regiao_geografica;
+
+CREATE TABLE regiao_geografica (
+    id serial PRIMARY KEY NOT NULL,
+    nome varchar(75) NOT NULL
+);
+
+CREATE UNIQUE INDEX ix_regiao ON regiao_geografica (nome);
+
 CREATE TABLE estado (
     id serial PRIMARY KEY NOT NULL,
     nome varchar(75) NOT NULL,
-    uf varchar(2) NOT NULL
+    uf varchar(2) NOT NULL,
+    regiao_id int NOT NULL
 );
 
 CREATE UNIQUE INDEX ix_estado ON estado (nome);
@@ -19,34 +31,36 @@ CREATE TABLE cidade (
 
 CREATE UNIQUE INDEX ix_cidade ON cidade (nome, estado_id);
 
-INSERT INTO estado (id, nome, uf) VALUES
-     (1, 'Acre', 'AC'),
-     (2, 'Alagoas', 'AL'),
-     (3, 'Amazonas', 'AM'),
-     (4, 'Amapá', 'AP'),
-     (5, 'Bahia', 'BA'),
-     (6, 'Ceará', 'CE'),
-     (7, 'Distrito Federal', 'DF'),
-     (8, 'Espírito Santo', 'ES'),
-     (9, 'Goiás', 'GO'),
-     (10, 'Maranhão', 'MA'),
-     (11, 'Minas Gerais', 'MG'),
-     (12, 'Mato Grosso do Sul', 'MS'),
-     (13, 'Mato Grosso', 'MT'),
-     (14, 'Pará', 'PA'),
-     (15, 'Paraíba', 'PB'),
-     (16, 'Pernambuco', 'PE'),
-     (17, 'Piauí', 'PI'),
-     (18, 'Paraná', 'PR'),
-     (19, 'Rio de Janeiro', 'RJ'),
-     (20, 'Rio Grande do Norte', 'RN'),
-     (21, 'Rondônia', 'RO'),
-     (22, 'Roraima', 'RR'),
-     (23, 'Rio Grande do Sul', 'RS'),
-     (24, 'Santa Catarina', 'SC'),
-     (25, 'Sergipe', 'SE'),
-     (26, 'São Paulo', 'SP'),
-     (27, 'Tocantins', 'TO');
+INSERT INTO regiao_geografica (nome) VALUES ('Norte'), ('Nordeste'), ('Centro-Oeste'), ('Sudeste'), ('Sul');
+
+INSERT INTO estado (id, nome, uf, regiao_id) VALUES
+     (1, 'Acre', 'AC', 1),
+     (2, 'Alagoas', 'AL', 2),
+     (3, 'Amazonas', 'AM', 1),
+     (4, 'Amapá', 'AP', 1),
+     (5, 'Bahia', 'BA', 2),
+     (6, 'Ceará', 'CE', 2),
+     (7, 'Distrito Federal', 'DF', 3),
+     (8, 'Espírito Santo', 'ES', 4),
+     (9, 'Goiás', 'GO', 3),
+     (10, 'Maranhão', 'MA', 2),
+     (11, 'Minas Gerais', 'MG', 4),
+     (12, 'Mato Grosso do Sul', 'MS', 3),
+     (13, 'Mato Grosso', 'MT', 3),
+     (14, 'Pará', 'PA', 1),
+     (15, 'Paraíba', 'PB', 2),
+     (16, 'Pernambuco', 'PE', 2),
+     (17, 'Piauí', 'PI', 2),
+     (18, 'Paraná', 'PR', 5),
+     (19, 'Rio de Janeiro', 'RJ', 4),
+     (20, 'Rio Grande do Norte', 'RN', 2),
+     (21, 'Rondônia', 'RO', 1),
+     (22, 'Roraima', 'RR', 1),
+     (23, 'Rio Grande do Sul', 'RS', 5),
+     (24, 'Santa Catarina', 'SC', 5),
+     (25, 'Sergipe', 'SE', 2),
+     (26, 'São Paulo', 'SP', 4),
+     (27, 'Tocantins', 'TO', 1);
 
 
 INSERT INTO cidade (id, nome, estado_id) VALUES
