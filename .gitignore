@@ -10,8 +10,6 @@ out/
 *.tar.gz
 *.rar
 
-.vscode
-
 #IntelliJ Project Files
 .idea/
 
