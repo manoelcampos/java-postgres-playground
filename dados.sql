@@ -5,6 +5,7 @@
 
 drop table if exists cidade;
 drop table if exists estado;
+
 drop table if exists regiao_geografica;
 
 CREATE TABLE regiao_geografica (
@@ -31,6 +32,7 @@ CREATE TABLE cidade (
     id serial PRIMARY KEY NOT NULL,
     nome varchar(120) NOT NULL,
     estado_id int NOT NULL,
+    capital boolean not null default false,
     constraint fk_cidade_estado foreign key (estado_id) references estado(id)
 );
 
@@ -39,33 +41,33 @@ CREATE UNIQUE INDEX ix_cidade ON cidade (nome, estado_id);
 INSERT INTO regiao_geografica (nome) VALUES ('Norte'), ('Nordeste'), ('Centro-Oeste'), ('Sudeste'), ('Sul');
 
 INSERT INTO estado (id, nome, uf, regiao_id, area_km2, populacao) VALUES
-     (1, 'Acre',                'AC', 1,  164123, 829780),
-     (2, 'Alagoas',             'AL', 2,   27848, 3125254),
-     (3, 'Amazonas',            'AM', 1, 1559167, 3952262),
-     (4, 'Amapá',               'AP', 1,  142470, 774268),
+     (1, 'Acre',                'AC', 1,  164123,   829780),
+     (2, 'Alagoas',             'AL', 2,   27848,  3125254),
+     (3, 'Amazonas',            'AM', 1, 1559167,  3952262),
+     (4, 'Amapá',               'AP', 1,  142470,   774268),
      (5, 'Bahia',               'BA', 2,  564760, 14659023),
-     (6, 'Ceará',               'CE', 2,  148894, 8936431),
-     (7, 'Distrito Federal',    'DF', 3,    5760, 2923369),
-     (8, 'Espírito Santo',      'ES', 4,   46074, 4108508),
-     (9, 'Goiás',               'GO', 3,  340203, 6950976),
-     (10, 'Maranhão',           'MA', 2,  329642, 6800605),
+     (6, 'Ceará',               'CE', 2,  148894,  8936431),
+     (7, 'Distrito Federal',    'DF', 3,    5760,  2923369),
+     (8, 'Espírito Santo',      'ES', 4,   46074,  4108508),
+     (9, 'Goiás',               'GO', 3,  340203,  6950976),
+     (10, 'Maranhão',           'MA', 2,  329642,  6800605),
      (11, 'Minas Gerais',       'MG', 4,  586521, 20732660),
-     (12, 'Mato Grosso do Sul', 'MS', 3,  357145, 2833742),
-     (13, 'Mato Grosso',        'MT', 3,  903207, 3784239),
-     (14, 'Pará',               'PA', 1, 1245870, 8442962),
-     (15, 'Paraíba',            'PB', 2,   56467, 4030961),
-     (16, 'Pernambuco',         'PE', 2,   98067, 9051113),
-     (17, 'Piauí',              'PI', 2,  251756, 3270174),
+     (12, 'Mato Grosso do Sul', 'MS', 3,  357145,  2833742),
+     (13, 'Mato Grosso',        'MT', 3,  903207,  3784239),
+     (14, 'Pará',               'PA', 1, 1245870,  8442962),
+     (15, 'Paraíba',            'PB', 2,   56467,  4030961),
+     (16, 'Pernambuco',         'PE', 2,   98067,  9051113),
+     (17, 'Piauí',              'PI', 2,  251756,  3270174),
      (18, 'Paraná',             'PR', 5,  199298, 11835379),
      (19, 'Rio de Janeiro',     'RJ', 4,   43750, 16615526),
-     (20, 'Rio Grande do Norte','RN', 2,   52809, 3303953),
-     (21, 'Rondônia',           'RO', 1,  237765, 1616379),
-     (22, 'Roraima',            'RR', 1,  223644, 634805),
+     (20, 'Rio Grande do Norte','RN', 2,   52809,  3303953),
+     (21, 'Rondônia',           'RO', 1,  237765,  1616379),
+     (22, 'Roraima',            'RR', 1,  223644,   634805),
      (23, 'Rio Grande do Sul',  'RS', 5,  281707, 11088065),
-     (24, 'Santa Catarina',     'SC', 5,   95730, 7762154),
-     (25, 'Sergipe',            'SE', 2,   21925, 2211868),
+     (24, 'Santa Catarina',     'SC', 5,   95730,  7762154),
+     (25, 'Sergipe',            'SE', 2,   21925,  2211868),
      (26, 'São Paulo',          'SP', 4,  248219, 46024937),
-     (27, 'Tocantins',          'TO', 1,  277466, 1584306);
+     (27, 'Tocantins',          'TO', 1,  277466,  1584306);
 
 
 INSERT INTO cidade (id, nome, estado_id) VALUES
@@ -5632,3 +5634,32 @@ INSERT INTO cidade (id, nome, estado_id) VALUES
      (5562, 'Tupiratins', 27),
      (5563, 'Wanderlândia', 27),
      (5564, 'Xambioá', 27);
+
+
+update cidade set capital = true where id =   94;
+update cidade set capital = true where id =  147;
+update cidade set capital = true where id =  256;
+update cidade set capital = true where id =  209;
+update cidade set capital = true where id =  616;
+update cidade set capital = true where id =  756;
+update cidade set capital = true where id =  882;
+update cidade set capital = true where id =   78;
+update cidade set capital = true where id =  977;
+update cidade set capital = true where id = 1314;
+update cidade set capital = true where id = 1630;
+update cidade set capital = true where id = 1506;
+update cidade set capital = true where id = 1383;
+update cidade set capital = true where id = 2436;
+update cidade set capital = true where id = 2655;
+update cidade set capital = true where id = 3315;
+update cidade set capital = true where id = 3582;
+update cidade set capital = true where id = 2878;
+update cidade set capital = true where id = 3658;
+update cidade set capital = true where id = 3770;
+update cidade set capital = true where id = 4382;
+update cidade set capital = true where id = 4400;
+update cidade set capital = true where id = 4174;
+update cidade set capital = true where id = 4500;
+update cidade set capital = true where id = 5353;
+update cidade set capital = true where id = 5270;
+update cidade set capital = true where id = 5514;
