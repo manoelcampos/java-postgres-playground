@@ -1,6 +1,7 @@
 -- Script PostgreSQL com cadastro de cidades e estados do país, conforme IBGE.
 -- Adaptado de https://www.ricardoarrigoni.com.br/cidades-brasil-lista-de-cidades-brasileiras-em-sql/
 -- Área por estado: https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_área
+-- População por estado (prévio censo 2022): https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_população
 
 drop table if exists cidade;
 drop table if exists estado;
@@ -19,6 +20,7 @@ CREATE TABLE estado (
     uf varchar(2) NOT NULL,
     regiao_id int NOT NULL,
     area_km2 int NOT NULL default 0,
+    populacao int NOT NULL default 0,
     constraint fk_estado_regiao foreign key (regiao_id) references regiao_geografica(id)
 );
 
@@ -36,34 +38,34 @@ CREATE UNIQUE INDEX ix_cidade ON cidade (nome, estado_id);
 
 INSERT INTO regiao_geografica (nome) VALUES ('Norte'), ('Nordeste'), ('Centro-Oeste'), ('Sudeste'), ('Sul');
 
-INSERT INTO estado (id, nome, uf, regiao_id, area_km2) VALUES
-     (1, 'Acre',                'AC', 1, 164123),
-     (2, 'Alagoas',             'AL', 2, 27848),
-     (3, 'Amazonas',            'AM', 1, 1559167),
-     (4, 'Amapá',               'AP', 1,  142470),
-     (5, 'Bahia',               'BA', 2, 564760),
-     (6, 'Ceará',               'CE', 2, 148894),
-     (7, 'Distrito Federal',    'DF', 3, 5760),
-     (8, 'Espírito Santo',      'ES', 4, 46074),
-     (9, 'Goiás',               'GO', 3, 340203),
-     (10, 'Maranhão',           'MA', 2, 329642),
-     (11, 'Minas Gerais',       'MG', 4, 586521),
-     (12, 'Mato Grosso do Sul', 'MS', 3, 357145),
-     (13, 'Mato Grosso',        'MT', 3, 903207),
-     (14, 'Pará',               'PA', 1, 1245870),
-     (15, 'Paraíba',            'PB', 2, 56467),
-     (16, 'Pernambuco',         'PE', 2, 98067),
-     (17, 'Piauí',              'PI', 2, 251756),
-     (18, 'Paraná',             'PR', 5, 199298),
-     (19, 'Rio de Janeiro',     'RJ', 4, 43750),
-     (20, 'Rio Grande do Norte','RN', 2, 52809),
-     (21, 'Rondônia',           'RO', 1, 237765),
-     (22, 'Roraima',            'RR', 1, 223644),
-     (23, 'Rio Grande do Sul',  'RS', 5, 281707),
-     (24, 'Santa Catarina',     'SC', 5, 95730),
-     (25, 'Sergipe',            'SE', 2, 21925),
-     (26, 'São Paulo',          'SP', 4, 248219),
-     (27, 'Tocantins',          'TO', 1, 277466);
+INSERT INTO estado (id, nome, uf, regiao_id, area_km2, populacao) VALUES
+     (1, 'Acre',                'AC', 1,  164123, 829780),
+     (2, 'Alagoas',             'AL', 2,   27848, 3125254),
+     (3, 'Amazonas',            'AM', 1, 1559167, 3952262),
+     (4, 'Amapá',               'AP', 1,  142470, 774268),
+     (5, 'Bahia',               'BA', 2,  564760, 14659023),
+     (6, 'Ceará',               'CE', 2,  148894, 8936431),
+     (7, 'Distrito Federal',    'DF', 3,    5760, 2923369),
+     (8, 'Espírito Santo',      'ES', 4,   46074, 4108508),
+     (9, 'Goiás',               'GO', 3,  340203, 6950976),
+     (10, 'Maranhão',           'MA', 2,  329642, 6800605),
+     (11, 'Minas Gerais',       'MG', 4,  586521, 20732660),
+     (12, 'Mato Grosso do Sul', 'MS', 3,  357145, 2833742),
+     (13, 'Mato Grosso',        'MT', 3,  903207, 3784239),
+     (14, 'Pará',               'PA', 1, 1245870, 8442962),
+     (15, 'Paraíba',            'PB', 2,   56467, 4030961),
+     (16, 'Pernambuco',         'PE', 2,   98067, 9051113),
+     (17, 'Piauí',              'PI', 2,  251756, 3270174),
+     (18, 'Paraná',             'PR', 5,  199298, 11835379),
+     (19, 'Rio de Janeiro',     'RJ', 4,   43750, 16615526),
+     (20, 'Rio Grande do Norte','RN', 2,   52809, 3303953),
+     (21, 'Rondônia',           'RO', 1,  237765, 1616379),
+     (22, 'Roraima',            'RR', 1,  223644, 634805),
+     (23, 'Rio Grande do Sul',  'RS', 5,  281707, 11088065),
+     (24, 'Santa Catarina',     'SC', 5,   95730, 7762154),
+     (25, 'Sergipe',            'SE', 2,   21925, 2211868),
+     (26, 'São Paulo',          'SP', 4,  248219, 46024937),
+     (27, 'Tocantins',          'TO', 1,  277466, 1584306);
 
 
 INSERT INTO cidade (id, nome, estado_id) VALUES
