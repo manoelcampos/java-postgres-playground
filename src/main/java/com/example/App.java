@@ -15,11 +15,12 @@ public class App {
         System.out.println("Listando estados cadastrados no banco de dados");
         try {
             Class.forName("org.postgresql.Driver");
-            var conn = DriverManager.getConnection("jdbc:postgresql://localhost/meubanco", "postgres", "");
-            var stm = conn.createStatement();
-            var result = stm.executeQuery("select * from estado");
-            while(result.next()) {
-                System.out.println(result.getString("nome"));
+            try(var conn = DriverManager.getConnection("jdbc:postgresql://localhost/meubanco", "postgres", "")){
+                var stm = conn.createStatement();
+                var result = stm.executeQuery("select * from estado");
+                while(result.next()) {
+                    System.out.println(result.getString("nome"));
+                }
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Erro: " + e.getMessage());
