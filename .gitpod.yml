@@ -6,4 +6,3 @@ vscode:
   extensions:
     - cweijan.vscode-mysql-client2
     - vscjava.vscode-java-pack
-    - redhat.java
