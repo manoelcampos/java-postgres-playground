@@ -16,7 +16,8 @@ CREATE TABLE estado (
     id serial PRIMARY KEY NOT NULL,
     nome varchar(75) NOT NULL,
     uf varchar(2) NOT NULL,
-    regiao_id int NOT NULL
+    regiao_id int NOT NULL,
+    constraint fk_estado_regiao foreign key (regiao_id) references regiao_geografica(id)
 );
 
 CREATE UNIQUE INDEX ix_estado ON estado (nome);
