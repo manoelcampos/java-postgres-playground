@@ -1,5 +1,6 @@
 {
     "java.jdt.ls.java.home": "~/.sdkman/candidates/java/current",
+    "java.inlayHints.parameterNames.enabled": "none",
     "maven.terminal.useJavaHome": true,
     "java.completion.favoriteStaticMembers": [
         "org.junit.Assert.*",
