@@ -122,6 +122,44 @@ create table item_venda(
     constraint fk_itemvenda_produto foreign key (produto_id) references produto(id)
 );
 
+
+CREATE OR REPLACE FUNCTION diminui_estoque_func()
+RETURNS trigger AS $$
+BEGIN
+    update produto set estoque = estoque - new.quant where produto.id = new.produto_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION devolve_estoque_func()
+RETURNS trigger AS $$
+BEGIN
+    update produto set estoque = estoque + old.quant where produto.id = old.produto_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION atualiza_estoque_func()
+RETURNS trigger AS $$
+BEGIN
+    update produto set estoque = estoque + old.quant - new.quant where produto.id = new.produto_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE 'plpgsql';
+
+
+CREATE TRIGGER diminui_estoque_trigger
+AFTER INSERT ON item_venda
+FOR EACH ROW EXECUTE PROCEDURE diminui_estoque_func();
+
+CREATE TRIGGER devolve_estoque_trigger
+AFTER DELETE ON item_venda
+FOR EACH ROW EXECUTE PROCEDURE devolve_estoque_func();
+
+CREATE TRIGGER atualiza_estoque_trigger
+AFTER UPDATE ON item_venda
+FOR EACH ROW EXECUTE PROCEDURE atualiza_estoque_func();
+
 -- ########################################################################################################
 
 INSERT INTO regiao_geografica (nome) VALUES ('Norte'), ('Nordeste'), ('Centro-Oeste'), ('Sudeste'), ('Sul');
