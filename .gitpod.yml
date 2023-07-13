@@ -4,7 +4,7 @@ image:
   file: .gitpod.Dockerfile
 vscode:
   extensions:
-    - cweijan.vscode-mysql-client2
+    - cweijan.vscode-postgresql-client2
     - vscjava.vscode-java-pack
     - redhat.java
     - vscjava.vscode-java-debug
