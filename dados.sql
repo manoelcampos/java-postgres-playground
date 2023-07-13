@@ -148,15 +148,15 @@ END;
 $$ LANGUAGE 'plpgsql';
 
 
-CREATE TRIGGER diminui_estoque_trigger
+CREATE OR REPLACE TRIGGER diminui_estoque_trigger
 AFTER INSERT ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE diminui_estoque_func();
 
-CREATE TRIGGER devolve_estoque_trigger
+CREATE OR REPLACE TRIGGER devolve_estoque_trigger
 AFTER DELETE ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE devolve_estoque_func();
 
-CREATE TRIGGER atualiza_estoque_trigger
+CREATE OR REPLACE TRIGGER atualiza_estoque_trigger
 AFTER UPDATE ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE atualiza_estoque_func();
 
