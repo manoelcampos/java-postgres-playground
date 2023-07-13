@@ -15,7 +15,7 @@ public class App {
         System.out.println("Listando estados cadastrados no banco de dados");
         try {
             Class.forName("org.postgresql.Driver");
-            try(var conn = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "postgres", "")){
+            try(var conn = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", "gitpod", "")){
                 var stm = conn.createStatement();
                 var result = stm.executeQuery("select * from estado");
                 while(result.next()) {
