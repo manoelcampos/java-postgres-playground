@@ -11,3 +11,5 @@ vscode:
     - vscjava.vscode-java-dependency
     - vscjava.vscode-java-test
     - vscjava.vscode-maven
+tasks:
+    - init: psql -c 'create user postgres'
