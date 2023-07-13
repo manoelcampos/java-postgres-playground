@@ -3,9 +3,17 @@
 -- Área por estado: https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_área
 -- População por estado (prévio censo 2022): https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_população
 
+drop table if exists cliente;
+drop table if exists funcionario;
+drop table if exists loja;
+drop table if exists item_venda;
+drop table if exists venda;
+drop table if exists estoque;
+drop table if exists produto;
+drop table if exists marca;
+
 drop table if exists cidade;
 drop table if exists estado;
-
 drop table if exists regiao_geografica;
 
 CREATE TABLE regiao_geografica (
@@ -37,6 +45,84 @@ CREATE TABLE cidade (
 );
 
 CREATE UNIQUE INDEX ix_cidade ON cidade (nome, estado_id);
+
+create table cliente (
+    id serial primary key not null,
+    nome varchar(75) not null,
+    cpf varchar(11) not null,
+    cidade_id int not null,
+    data_nascimento date not null,
+    constraint fk_cliente_cidade foreign key (cidade_id) references cidade(id)
+);
+
+create unique INDEX ix_cpf_cliente on cliente (cpf);
+
+create table loja (
+    id serial primary key not null,
+    cidade_id int not null,
+    data_inauguracao date not null,
+    constraint fk_loja_cidade foreign key (cidade_id) references cidade(id)
+);
+
+
+create table funcionario (
+    id serial primary key not null,
+    nome varchar(75) not null,
+    cpf varchar(11) not null,
+    loja_id int not null,
+    data_nascimento date not null,
+    constraint fk_funcionario_loja foreign key (loja_id) references loja(id)
+);
+
+create unique INDEX ix_cpf_funcionario on funcionario (cpf);
+
+create table marca (
+    id serial primary key not null,
+    nome varchar(200) not null
+);
+
+create unique INDEX ix_marca on marca (nome);
+
+create table produto (
+    id serial primary key not null,
+    nome varchar(200) not null,
+    descricao varchar(5000) not null,
+    marca_id int not null,
+    valor decimal(10,2) not null,
+    constraint fk_produto_marca foreign key (marca_id) references marca(id)
+);
+
+create table estoque (
+    produto_id int not null,
+    loja_id int not null,
+    quant int not null,
+    primary key (produto_id, loja_id),
+    constraint fk_estoque_produto foreign key (produto_id) references produto(id) on delete cascade,
+    constraint fk_estoque_loja foreign key (loja_id) references loja(id)
+);
+
+create table venda(
+    id serial primary key not null,
+    loja_id int not null,
+    cliente_id int not null,
+    funcionario_id int not null,
+    data_cadastro timestamp not null default current_timestamp,
+    constraint fk_venda_loja foreign key (loja_id) references loja(id),
+    constraint fk_venda_cliente foreign key (cliente_id) references cliente(id),
+    constraint fk_venda_funcionario foreign key (funcionario_id) references funcionario(id)
+);
+
+create table item_venda(
+    venda_id int not null,
+    produto_id int not null,
+    quant int not null,
+    valor decimal(10,2) not null,
+    primary key (venda_id, produto_id),
+    constraint fk_itemvenda_venda foreign key (venda_id) references venda(id) on delete cascade,
+    constraint fk_itemvenda_produto foreign key (produto_id) references produto(id)
+);
+
+-- ########################################################################################################
 
 INSERT INTO regiao_geografica (nome) VALUES ('Norte'), ('Nordeste'), ('Centro-Oeste'), ('Sudeste'), ('Sul');
 
