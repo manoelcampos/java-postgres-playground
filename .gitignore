@@ -3,6 +3,7 @@
 # Log file
 *.log
 
+node_modules/
 target/
 out/
 bin/
