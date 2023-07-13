@@ -1,6 +1,6 @@
 ## Postgres Playground
 
-[![](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/manoelcampos/postgres-playground)
+[![](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/manoelcampos/java-postgres-playground)
 
 
 Clique no botão acima para abrir o projeto no [GitPod](https://gitpod.io)
