@@ -6,6 +6,3 @@ vscode:
   extensions:
     - cweijan.vscode-mysql-client2
     - vscjava.vscode-java-pack
-tasks:
-    - init: create postgres user
-      command: psql -c 'create user postgres'
