@@ -126,7 +126,9 @@ create table item_venda(
 CREATE OR REPLACE FUNCTION diminui_estoque_func()
 RETURNS trigger AS $$
 BEGIN
-    update produto set estoque = estoque - new.quant where produto.id = new.produto_id;
+    update estoque set quant = quant - new.quant 
+    where produto_id = new.produto_id
+    and estoque.loja_id = (select v.loja_id from venda v where v.id = new.venda_id);
     RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
@@ -134,7 +136,9 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION devolve_estoque_func()
 RETURNS trigger AS $$
 BEGIN
-    update produto set estoque = estoque + old.quant where produto.id = old.produto_id;
+    update estoque set quant = quant + old.quant
+    where produto_id = old.produto_id
+    and estoque.loja_id = (select v.loja_id from venda v where v.id = old.venda_id);
     RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
@@ -142,7 +146,9 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION atualiza_estoque_func()
 RETURNS trigger AS $$
 BEGIN
-    update produto set estoque = estoque + old.quant - new.quant where produto.id = new.produto_id;
+    update estoque set quant = quant + old.quant - new.quant
+    where produto_id = new.produto_id
+    and loja_id = (select v.loja_id from venda v where v.id = new.venda_id);
     RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
