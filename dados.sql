@@ -86,7 +86,6 @@ create unique INDEX ix_marca on marca (nome);
 create table produto (
     id serial primary key not null,
     nome varchar(200) not null,
-    descricao varchar(5000) not null,
     marca_id int not null,
     valor decimal(10,2) not null,
     constraint fk_produto_marca foreign key (marca_id) references marca(id)
