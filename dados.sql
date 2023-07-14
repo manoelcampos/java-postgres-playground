@@ -3,15 +3,16 @@
 -- Área por estado: https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_área
 -- População por estado (prévio censo 2022): https://pt.wikipedia.org/wiki/Lista_de_unidades_federativas_do_Brasil_por_população
 
-drop table if exists cliente;
-drop table if exists funcionario;
-drop table if exists loja;
 drop table if exists item_venda;
 drop table if exists venda;
+
+drop table if exists cliente;
+drop table if exists funcionario;
 drop table if exists estoque;
 drop table if exists produto;
 drop table if exists marca;
 
+drop table if exists loja;
 drop table if exists cidade;
 drop table if exists estado;
 drop table if exists regiao_geografica;
@@ -147,15 +148,15 @@ END;
 $$ LANGUAGE 'plpgsql';
 
 
-CREATE OR REPLACE TRIGGER diminui_estoque_trigger
+CREATE TRIGGER diminui_estoque_trigger
 AFTER INSERT ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE diminui_estoque_func();
 
-CREATE OR REPLACE TRIGGER devolve_estoque_trigger
+CREATE TRIGGER devolve_estoque_trigger
 AFTER DELETE ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE devolve_estoque_func();
 
-CREATE OR REPLACE TRIGGER atualiza_estoque_trigger
+CREATE TRIGGER atualiza_estoque_trigger
 AFTER UPDATE ON item_venda
 FOR EACH ROW EXECUTE PROCEDURE atualiza_estoque_func();
 
