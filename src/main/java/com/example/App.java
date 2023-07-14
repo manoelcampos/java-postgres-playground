@@ -22,8 +22,10 @@ public class App {
                     System.out.println(result.getString("nome"));
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Não foi possível carregar o driver JDBC para acesso ao banco de dados: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Não foi executar a consulta ao banco de dados: " + e.getMessage());
         }
     }
     
