@@ -32,6 +32,6 @@ public class App {
             if(statement == null)
                 System.err.println("Não foi possível conectar ao banco de dados: " + e.getMessage());
             else System.err.println("Não foi possível executar a consulta ao banco: " + e.getMessage());
-        }    }
-    
+        }    
+    }
 }
