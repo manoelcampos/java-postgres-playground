@@ -1,8 +1,13 @@
 const { faker } = require('@faker-js/faker');
 
+const lojas = 20, produtos = 200, vendas = 1000
+
 // Função auxiliar para gerar uma string formatada para o insert
 function formatInsert(table, columns, values) {
   const newValues = values.map(val => {
+    if(typeof val !== 'string')
+        return val
+
     const quotes = val.startsWith("'")
     val = val.replaceAll("'", "")
     return quotes ? `'${val}'` : val
@@ -35,10 +40,10 @@ function generateClienteInserts(numInserts) {
 }
 
 // Gerar inserts para a tabela loja
-function generateLojaInserts(numInserts) {
+function generateLojaInserts() {
   const inserts = [];
 
-  for (let i = 0; i < numInserts; i++) {
+  for (let i = 0; i < lojas; i++) {
     const cidade_id = faker.number.int({ min: 1, max: 5564 });
     const data_inauguracao = faker.date.birthdate().toISOString().split('T')[0];
 
@@ -60,7 +65,7 @@ function generateFuncionarioInserts(numInserts) {
   for (let i = 0; i < numInserts; i++) {
     const nome = faker.person.fullName();
     const cpf = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const loja_id = faker.number.int({ min: 1, max: 5 });
+    const loja_id = faker.number.int({ min: 1, max: lojas });
     const data_nascimento = faker.date.birthdate().toISOString().split('T')[0];
 
     const insert = formatInsert('funcionario', ['nome', 'cpf', 'loja_id', 'data_nascimento'], [
@@ -91,10 +96,10 @@ function generateMarcaInserts(numInserts) {
 }
 
 // Gerar inserts para a tabela produto
-function generateProdutoInserts(numInserts) {
+function generateProdutoInserts() {
   const inserts = [];
 
-  for (let i = 0; i < numInserts; i++) {
+  for (let i = 0; i < produtos; i++) {
     const nome = faker.commerce.productName();
     const marca_id = faker.number.int({ min: 1, max: 5 });
     const valor = faker.number.int({ min: 10, max: 1000 });
@@ -112,31 +117,30 @@ function generateProdutoInserts(numInserts) {
 }
 
 // Gerar inserts para a tabela estoque
-function generateEstoqueInserts(numInserts) {
+function generateEstoqueInserts() {
   const inserts = [];
+  const quant = 10000;
 
-  for (let i = 0; i < numInserts; i++) {
-    const produto_id = faker.number.int({ min: 1, max: 50 });
-    const loja_id = faker.number.int({ min: 1, max: 10 });
-    const quant = 10000;
+  for (let loja_id = 1; loja_id <= lojas; loja_id++) {
+    for (let produto_id = 1; produto_id <= produtos; produto_id++) {
+      const insert = formatInsert('estoque', ['produto_id', 'loja_id', 'quant'], [
+        produto_id,
+        loja_id,
+        quant
+      ]);
 
-    const insert = formatInsert('estoque', ['produto_id', 'loja_id', 'quant'], [
-      `${produto_id}`,
-      `${loja_id}`,
-      `${quant}`
-    ]);
-
-    inserts.push(insert);
+      inserts.push(insert);      
+    }
   }
 
   return inserts;
 }
 
 // Gerar inserts para a tabela venda
-function generateVendaInserts(numInserts) {
+function generateVendaInserts() {
   const inserts = [];
 
-  for (let i = 0; i < numInserts; i++) {
+  for (let i = 0; i < vendas; i++) {
     const loja_id = faker.number.int({ min: 1, max: 10 });
     const cliente_id = faker.number.int({ min: 1, max: 100 });
     const funcionario_id = faker.number.int({ min: 1, max: 50 });
@@ -154,51 +158,43 @@ function generateVendaInserts(numInserts) {
 }
 
 // Gerar inserts para a tabela item_venda
-function generateItemVendaInserts(numInserts) {
+function generateItemVendaInserts() {
   const inserts = [];
 
-  for (let i = 0; i < numInserts; i++) {
-    const venda_id = faker.number.int({ min: 1, max: 1000 });
-    const produto_id = faker.number.int({ min: 1, max: 50 });
-    const quant = faker.number.int({ min: 1, max: 10 });
-    const valor = faker.number.int({ min: 10, max: 100 });
+  for (let venda_id = 1; venda_id <= vendas; venda_id++) {
+    const totalItens = faker.number.int({ min: 1, max: 8 });
+    const produtoIdSet = new Set()
+    for (let i = 1; i <= totalItens; i++) {
+      const produto_id = faker.number.int({ min: 1, max: produtos });
+      produtoIdSet.add(produto_id)
+    }
 
-    const insert = formatInsert('item_venda', ['venda_id', 'produto_id', 'quant', 'valor'], [
-      `${venda_id}`,
-      `${produto_id}`,
-      `${quant}`,
-      `${valor}`
-    ]);
-
-    inserts.push(insert);
+    produtoIdSet.forEach(produto_id => {
+      const quant = faker.number.int({ min: 1, max: 10 });
+      const valor = faker.number.int({ min: 10, max: 100 });
+  
+      const insert = formatInsert('item_venda', ['venda_id', 'produto_id', 'quant', 'valor'], [
+        `${venda_id}`,
+        `${produto_id}`,
+        `${quant}`,
+        `${valor}`
+      ]);
+  
+      inserts.push(insert);  
+    })
   }
 
   return inserts;
 }
 
-// Gerar 100 inserts para a tabela cliente
 const clienteInserts = generateClienteInserts(100);
-
-// Gerar 20 inserts para a tabela loja
-const lojaInserts = generateLojaInserts(20);
-
-// Gerar 50 inserts para a tabela funcionario
+const lojaInserts = generateLojaInserts();
 const funcionarioInserts = generateFuncionarioInserts(50);
-
-// Gerar 4 inserts para a tabela marca
 const marcaInserts = generateMarcaInserts(40);
-
-// Gerar 200 inserts para a tabela produto
-const produtoInserts = generateProdutoInserts(200);
-
-// Gerar 500 inserts para a tabela estoque
-const estoqueInserts = generateEstoqueInserts(500);
-
-// Gerar 1000 inserts para a tabela venda
-const vendaInserts = generateVendaInserts(1000);
-
-// Gerar 2000 inserts para a tabela item_venda
-const itemVendaInserts = generateItemVendaInserts(2000);
+const produtoInserts = generateProdutoInserts();
+const estoqueInserts = generateEstoqueInserts();
+const vendaInserts = generateVendaInserts();
+const itemVendaInserts = generateItemVendaInserts();
 
 // Imprimir os inserts gerados
 console.log('');
