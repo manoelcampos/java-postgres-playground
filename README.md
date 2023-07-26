@@ -2,6 +2,8 @@
 
 [![](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/manoelcampos/java-postgres-playground)
 
+> **Warning**
+> O gitpod.io não funciona se você tiver a extensão do tradutor habilitada no seu navegador.
 
 Clique no botão acima para abrir o projeto no [GitPod](https://gitpod.io)
 contendo um servidor Postgres, um VS Code e uma extensão para administração
