@@ -10,6 +10,7 @@ public class ClienteTest {
     @Test
     void testGetIdade() {
         var cliente = new Cliente();
-        assertEquals( 42, cliente.idade());
+        cliente.setAnoNascimento(1980);
+        assertEquals( 43, cliente.idade());
     }
 }
