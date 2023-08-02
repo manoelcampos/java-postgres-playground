@@ -4,7 +4,7 @@
   "description": "Gerador de dados aleatórios usando https://fakerjs.dev",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js > random.sql && echo 'Veja o resultado no arquivo random.sql'"
   },
   "keywords": [],
   "author": "Manoel Campos da Silva Filho",
