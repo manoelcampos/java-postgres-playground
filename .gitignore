@@ -1,4 +1,5 @@
 .env
+random.sql
 
 # Log file
 *.log
