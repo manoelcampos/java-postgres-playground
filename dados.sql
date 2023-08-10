@@ -34,6 +34,8 @@ CREATE TABLE estado (
     constraint fk_estado_regiao foreign key (regiao_id) references regiao_geografica(id)
 );
 
+ALTER SEQUENCE estado_id_seq RESTART WITH 27;
+
 CREATE UNIQUE INDEX ix_estado ON estado (nome);
 CREATE UNIQUE INDEX ix_uf ON estado (uf);
 
@@ -44,6 +46,8 @@ CREATE TABLE cidade (
     capital boolean not null default false,
     constraint fk_cidade_estado foreign key (estado_id) references estado(id)
 );
+
+ALTER SEQUENCE cidade_id_seq RESTART WITH 5564;
 
 CREATE UNIQUE INDEX ix_cidade ON cidade (nome, estado_id);
 
