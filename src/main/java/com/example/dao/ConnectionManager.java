@@ -12,11 +12,4 @@ public class ConnectionManager {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
     }
-
-      
-    /*
-    private void carregarDriverJDBC() throws ClassNotFoundException {
-        Class.forName("org.postgresql.Driver");
-    }
-    */
 }
