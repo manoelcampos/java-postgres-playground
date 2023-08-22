@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
 import com.example.financeiro.currency.CurrencyAPI;
+import com.example.financeiro.model.Transacao;
 import com.example.financeiro.yahoofinance.YahooFinanceData;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -16,9 +17,26 @@ public class Principal {
     private static final String ADDRESS = "https://query1.finance.yahoo.com/v7/finance/spark?symbols=USDBRL=X";
 
     public static void main(String[] args) {
+        simulatedAPIReqeust();
+        yahooFinanceRequest();
+
+        Transacao.adicionar(new Transacao("Manoel", 100, "USD", 'D'));
+        Transacao.adicionar(new Transacao("Manoel", 100, "BRL", 'D'));
+        Transacao.adicionar(new Transacao("Manoel", 10, "BRL", 'T'));
+        Transacao.adicionar(new Transacao("Manoel", 20, "BRL", 'D'));
+        Transacao.adicionar(new Transacao("Manoel", 5,   "BRL", 'R'));
+
+        Transacao.adicionar(new Transacao("Raysa", 50,   "BRL", 'R'));
+
+        //Transacao.getLista().forEach(System.out::println);
+        System.out.println("Saldo: " + Transacao.getSaldo("Manoel"));
+    }
+
+    private static void simulatedAPIReqeust() {
         System.out.println(CurrencyAPI.getQuote("BRL",  "EUR"));
+    }
 
-
+    private static void yahooFinanceRequest() {
         var http = HttpClient.newHttpClient();
         try {
             var mapper = new JsonMapper()
