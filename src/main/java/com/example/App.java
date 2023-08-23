@@ -15,7 +15,6 @@ public class App {
 
     public App(){
         try(var conn = getConnection()){
-            carregarDriverJDBC();
             listarEstados(conn);
             localizarEstado(conn, "PR");
             listarDadosTabela(conn, "produto");
@@ -86,13 +85,5 @@ public class App {
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-    }
-
-    private void carregarDriverJDBC() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Não foi possível carregar a biblioteca para acesso ao banco de dados: " + e.getMessage());
-        }
     }
 }
