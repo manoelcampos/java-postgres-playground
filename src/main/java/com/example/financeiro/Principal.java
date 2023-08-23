@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
 import com.example.financeiro.currency.CurrencyAPI;
+import com.example.financeiro.dao.TransacaoDAO;
 import com.example.financeiro.model.Transacao;
 import com.example.financeiro.yahoofinance.YahooFinanceData;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -20,16 +21,16 @@ public class Principal {
         simulatedAPIReqeust();
         yahooFinanceRequest();
 
-        Transacao.adicionar(new Transacao("Manoel", 100, "USD", 'D'));
-        Transacao.adicionar(new Transacao("Manoel", 100, "BRL", 'D'));
-        Transacao.adicionar(new Transacao("Manoel", 10, "BRL", 'T'));
-        Transacao.adicionar(new Transacao("Manoel", 20, "BRL", 'D'));
-        Transacao.adicionar(new Transacao("Manoel", 5,   "BRL", 'R'));
-
-        Transacao.adicionar(new Transacao("Raysa", 50,   "BRL", 'R'));
+        var dao = new TransacaoDAO();
+        dao.adicionar(new Transacao("Manoel", 100, "USD", 'D'));
+        dao.adicionar(new Transacao("Manoel", 100, "BRL", 'D'));
+        dao.adicionar(new Transacao("Manoel", 10, "BRL", 'T'));
+        dao.adicionar(new Transacao("Manoel", 20, "BRL", 'D'));
+        var ultima = new Transacao("Manoel", 5,   "BRL", 'R');
+        dao.adicionar(ultima);
 
         //Transacao.getLista().forEach(System.out::println);
-        System.out.println("Saldo: " + Transacao.getSaldo("Manoel"));
+        System.out.println("Saldo: " + dao.getSaldo("Manoel"));
     }
 
     private static void simulatedAPIReqeust() {
