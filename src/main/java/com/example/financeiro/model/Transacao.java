@@ -15,12 +15,16 @@ public class Transacao {
     private LocalDateTime dataHora;
     private boolean suspeita;
     
-    public Transacao(String cliente, double valor, String moeda, char tipo) {
+    Transacao(String cliente, double valor, String moeda, char tipo, LocalDateTime dataHora) {
         this.cliente = cliente;
         this.valor = valor;
         this.moeda = moeda;
         this.tipo = tipo;
-        this.dataHora = LocalDateTime.now();
+        this.dataHora = dataHora;
+    }
+
+    public Transacao(String cliente, double valor, String moeda, char tipo) {
+        this(cliente, valor, moeda, tipo, LocalDateTime.now());
     }
 
     public static Transacao newSuspeita(Transacao t) {
@@ -60,10 +64,6 @@ public class Transacao {
 
     public boolean isSuspeita() {
         return suspeita;
-    }
-
-    void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
     }
 
     @Override

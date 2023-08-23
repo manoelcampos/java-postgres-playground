@@ -44,9 +44,8 @@ public class TransacaoTest {
 
     @Test
     void adicionarTransacoesRetiradasDiasDiferentes() {
-        var primeira = new Transacao("Manoel", 100, "BRL", 'R');
         var anteontem = LocalDateTime.now().minusDays(2);
-        primeira.setDataHora(anteontem);
+        var primeira = new Transacao("Manoel", 100, "BRL", 'R', anteontem);
         dao.adicionar(primeira);
         
         dao.adicionar(new Transacao("Manoel", 200, "BRL", 'R'));

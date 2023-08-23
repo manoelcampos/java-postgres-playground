@@ -21,8 +21,8 @@ public class TransacaoDAO {
         int totalRetiradas = 0;
         for (var t : lista) {
             var ontem = nova.getDataHora().minusDays(1);
-            if(t.getCliente().equals(nova.getCliente()) && t.getTipo() == 'R' && t.getDataHora().isAfter(ontem)){
-                totalRetiradas++;
+            if(t.getCliente().equals(nova.getCliente()) && t.getTipo() == 'R' && t.getDataHora().isAfter(ontem) && ++totalRetiradas >= 2){
+                break;
             } 
         }
 
