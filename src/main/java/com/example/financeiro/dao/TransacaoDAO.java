@@ -1,7 +1,6 @@
 package com.example.financeiro.dao;
 
 import com.example.financeiro.model.Transacao;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

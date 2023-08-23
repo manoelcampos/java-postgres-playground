@@ -1,7 +1,6 @@
 package com.example.financeiro.model;
 
 import java.time.LocalDateTime;
-import java.util.*;
 
 import com.example.financeiro.currency.CurrencyAPI;
 
