@@ -24,7 +24,8 @@ Execute todos os passos, a partir do B (pode fazer todos os comandos só no fina
 
 ## 3.1 Fazer no início da prova
 ```
-# Baixar o projeto pra máquina local no início da prova (já configurando o remote)
+# Baixar o projeto pra máquina local no início da prova
+# O comando cria uma pasta com o nome que aparece no final da URL e já configurando o remote
 git clone URL_REPOSITORIO_REMOTO
 ```
 
