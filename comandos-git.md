@@ -50,4 +50,4 @@ git init
 
 ## 4.2 Fazer no final da prova
 
-- Executar todos os passos, a partir do A 
+Executar todos os passos, a partir do A 
