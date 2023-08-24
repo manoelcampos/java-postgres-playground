@@ -1,4 +1,4 @@
-# 1. Você recebeu um repositório git local pronto mas sem um endereço remoto (acho pouco provável)
+# 1. Você recebeu um projeto em um repositório git local, mas SEM um endereço remoto (acho pouco provável)
 
 ```
 # A. Pode fazer todos os comandos só no final da prova
@@ -20,7 +20,7 @@ git push
 
 Execute todos os passos, a partir do B (pode fazer todos os comandos só no final da prova).
 
-# 3. Você não recebeu um repositório git local na máquina da prova e tem que baixar
+# 3. Você NÃO recebeu um projeto em um repositório git local na máquina da prova e tem que baixar
 
 ## 3.1 Fazer no início da prova
 ```
