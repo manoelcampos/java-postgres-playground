@@ -8,9 +8,11 @@ git remote add origin URL_REPOSITORIO_REMOTO
 git add .
 
 # C. Confirmar as alteracoes no repositório local
+# O comando pode dar erro, pedindo pra configurar nome e email. É só seguir as instruções e tentar novamente.
 git commit -m "Alteracoes"
 
 # D. Enviar as alterações pro repositório remoto
+# Depois de executar, ele pode pedir pra executar o comando de uma forma diferente. É só copiar e colar como ele mostrar
 git push 
 ```
 
