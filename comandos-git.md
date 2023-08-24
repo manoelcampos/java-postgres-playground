@@ -18,7 +18,7 @@ git push
 
 # 2. Você recebeu um projeto em um repositório git local já com o endereço do repositório remoto
 
-Execute todos os passos, a partir do B (pode fazer todos os comandos só no final da prova)
+Execute todos os passos, a partir do B (pode fazer todos os comandos só no final da prova).
 
 # 3. Você não recebeu um repositório git local na máquina da prova e tem que baixar
 
