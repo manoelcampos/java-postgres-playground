@@ -31,7 +31,7 @@ git clone URL_REPOSITORIO_REMOTO
 
 # 4. Você tem que criar um projeto e repositório git do zero
 
-## Fazer no início da prova
+## 4.1 Fazer no início da prova
 
 ```
 # Criar uma pasta para o projeto
@@ -44,6 +44,6 @@ git clone URL_REPOSITORIO_REMOTO
 git init 
 ```
 
-# Fazer no final da prova
+# 4.2 Fazer no final da prova
 
 - Executar todos os passos, a partir do A 
