@@ -22,12 +22,15 @@ Execute todos os passos, a partir do B (pode fazer todos os comandos só no fina
 
 # 3. Você não recebeu um repositório git local na máquina da prova e tem que baixar
 
+## 3.1 Fazer no início da prova
 ```
 # Baixar o projeto pra máquina local no início da prova (já configurando o remote)
 git clone URL_REPOSITORIO_REMOTO
-
-# Executar todos os passos, a partir do B (estes pode fazer só no final da prova)
 ```
+
+## 3.2 Fazer no final da prova
+
+Execute todos os passos, a partir do B (estes pode fazer só no final da prova).
 
 # 4. Você tem que criar um projeto e repositório git do zero
 
@@ -44,6 +47,6 @@ git clone URL_REPOSITORIO_REMOTO
 git init 
 ```
 
-# 4.2 Fazer no final da prova
+## 4.2 Fazer no final da prova
 
 - Executar todos os passos, a partir do A 
