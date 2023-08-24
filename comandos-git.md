@@ -1,4 +1,4 @@
-# 1. Você recebeu um repositório git local pronto mas sem um endereço remoto
+# 1. Você recebeu um repositório git local pronto mas sem um endereço remoto (acho pouco provável)
 
 ```
 # A. Pode fazer todos os comandos só no final da prova
@@ -32,7 +32,7 @@ git clone URL_REPOSITORIO_REMOTO
 
 Execute todos os passos, a partir do B (estes pode fazer só no final da prova).
 
-# 4. Você tem que criar um projeto e repositório git do zero
+# 4. Você tem que criar um projeto e repositório git do zero (acho improvável)
 
 ## 4.1 Fazer no início da prova
 
