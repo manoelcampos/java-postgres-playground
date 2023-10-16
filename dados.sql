@@ -5,7 +5,6 @@
 
 drop table if exists cidade;
 drop table if exists estado;
-
 drop table if exists regiao_geografica;
 
 CREATE TABLE regiao_geografica (
