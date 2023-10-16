@@ -1,0 +1,15 @@
+{
+  "name": "gerar-dados",
+  "version": "1.0.0",
+  "description": "Gerador de dados aleatórios usando https://fakerjs.dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Manoel Campos da Silva Filho",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2"
+  }
+}
