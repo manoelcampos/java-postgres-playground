@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class App {
-    
     public static void main(String[] args){
         System.out.println();
         System.out.println("Aplicação Java de Exemplo\n");
@@ -26,5 +25,4 @@ public class App {
             System.out.println("Erro: " + e.getMessage());
         }
     }
-    
 }
